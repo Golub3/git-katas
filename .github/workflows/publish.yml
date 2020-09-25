@@ -1,16 +1,3 @@
-name: Publish
-
-on:
-  push:
-    tags:
-    - '*'
-
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
     - name: Archive katas
       shell: bash
       run: git archive --output=git-katas.zip HEAD
