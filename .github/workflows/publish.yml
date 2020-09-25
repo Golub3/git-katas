@@ -1,3 +1,24 @@
+<<<<<<< HEAD
+=======
+name: Publish
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Get tag
+      id: get_tag
+      run: echo ::set-output name=TAG::${GITHUB_REF/refs\/tags\//}
+
+>>>>>>> 48382f5... Fix tag in release asset name
     - name: Archive katas
       shell: bash
       run: git archive --output=git-katas.zip HEAD
