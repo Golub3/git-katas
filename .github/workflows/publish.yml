@@ -11,11 +11,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Get tag
-      id: get_tag
-      run: echo ::set-output name=TAG::${GITHUB_REF/refs\/tags\//}
-
     - name: Archive katas
       shell: bash
       run: git archive --output=git-katas.zip HEAD
@@ -32,11 +27,11 @@ jobs:
         prerelease: false
 
     - name: Attach katas
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./git-katas.zip
-        asset_name: git-katas-${{ steps.get_tag.outputs.TAG }}.zip
-        asset_content_type: application/zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./git-katas.zip
+          asset_name: git-katas-${{ github.ref }}.zip
+          asset_content_type: application/zip
